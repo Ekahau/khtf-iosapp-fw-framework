@@ -1,0 +1,6 @@
+framework module KhtfIosAppFw {
+    umbrella header "KhtfIosAppFw.h"
+
+    export *
+    module * { export * }
+}
