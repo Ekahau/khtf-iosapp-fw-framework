@@ -178,6 +178,25 @@ __attribute__((swift_name("Summator")))
 @end;
 
 __attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("LibFCase")))
+@interface Khtf_iosapp_fwLibFCase : KotlinBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (void)doSomething __attribute__((swift_name("doSomething()")));
+- (NSString *)getContent __attribute__((swift_name("getContent()")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("LibGCase")))
+@interface Khtf_iosapp_fwLibGCase : KotlinBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (void)doSomething1 __attribute__((swift_name("doSomething1()")));
+- (void)doSomething2 __attribute__((swift_name("doSomething2()")));
+- (NSString *)getContent __attribute__((swift_name("getContent()")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Summator__")))
 @interface Khtf_iosapp_fwSummator__ : KotlinBase
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
@@ -191,6 +210,54 @@ __attribute__((swift_name("Summator__.Companion")))
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
 + (instancetype)companion __attribute__((swift_name("init()")));
 - (int32_t)sumA:(int32_t)a b:(int32_t)b __attribute__((swift_name("sum(a:b:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("DecoratorService")))
+@interface Khtf_iosapp_fwDecoratorService : KotlinBase
+- (instancetype)initWithSuffix:(NSString *)suffix __attribute__((swift_name("init(suffix:)"))) __attribute__((objc_designated_initializer));
+- (NSString *)getLastValue __attribute__((swift_name("getLastValue()")));
+- (NSString *)getSize __attribute__((swift_name("getSize()")));
+- (NSString *)getString __attribute__((swift_name("getString()")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("IndependentService")))
+@interface Khtf_iosapp_fwIndependentService : KotlinBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (NSString *)formatS:(NSString *)s __attribute__((swift_name("format(s:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("LibEntryPoint1")))
+@interface Khtf_iosapp_fwLibEntryPoint1 : KotlinBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (void)addValueValue:(NSString *)value __attribute__((swift_name("addValue(value:)")));
+- (NSString *)getString __attribute__((swift_name("getString()")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("LibEntryPoint2")))
+@interface Khtf_iosapp_fwLibEntryPoint2 : KotlinBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (void)addValue1Value:(NSString *)value __attribute__((swift_name("addValue1(value:)")));
+- (void)addValue2Value:(NSString *)value __attribute__((swift_name("addValue2(value:)")));
+- (NSString *)getString __attribute__((swift_name("getString()")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("HistoryServiceFactoryKt")))
+@interface Khtf_iosapp_fwHistoryServiceFactoryKt : KotlinBase
++ (void)setDefaultHistoryServiceDataInitialValue:(NSString *)initialValue __attribute__((swift_name("setDefaultHistoryServiceData(initialValue:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("ModificationServiceFactoryKt")))
+@interface Khtf_iosapp_fwModificationServiceFactoryKt : KotlinBase
++ (void)setDefaultModificationServiceDataMod1:(NSString *)mod1 mod2:(NSString *)mod2 __attribute__((swift_name("setDefaultModificationServiceData(mod1:mod2:)")));
 @end;
 
 #pragma clang diagnostic pop

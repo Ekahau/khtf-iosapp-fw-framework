@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
   s.name = 'KhtfIosAppFw'
-  s.version = '1.0.0'
+  s.version = '1.0.1'
   s.authors = {
     'Konstantin Petrukhnov' => 'konstantin.petrukhnov@ekahau.com',
-    'Jarno Leppänen' => 'jarno.leppanen@ekahau.com'
+    'Jarno Lepp??nen' => 'jarno.leppanen@ekahau.com'
   }
   s.license = 'MIT'
   s.homepage = 'https://github.com/Ekahau/khtf-iosapp-fw'
