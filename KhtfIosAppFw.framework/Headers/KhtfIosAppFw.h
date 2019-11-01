@@ -6,7 +6,9 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSValue.h>
 
-@class Khtf_iosapp_fwSummator;
+@class Khtf_iosapp_fwSummator, Khtf_iosapp_fwColorProvider, Khtf_iosapp_fwKotlinEnum, Khtf_iosapp_fwContentEncoding, Khtf_iosapp_fwPathComponent, Khtf_iosapp_fwStatResult, Khtf_iosapp_fwPath, Khtf_iosapp_fwFileType, NSURL, Khtf_iosapp_fwKotlinStringCompanion, NSData, NSString;
+
+@protocol Khtf_iosapp_fwKotlinComparable;
 
 NS_ASSUME_NONNULL_BEGIN
 #pragma clang diagnostic push
@@ -158,6 +160,7 @@ __attribute__((swift_name("SummatorFw")))
 - (int32_t)sumA2A:(int32_t)a b:(int32_t)b __attribute__((swift_name("sumA2(a:b:)")));
 - (int32_t)sumCA:(int32_t)a b:(int32_t)b __attribute__((swift_name("sumC(a:b:)")));
 - (Khtf_iosapp_fwSummator *)getSummatorC __attribute__((swift_name("getSummatorC()")));
+- (void)testFiles __attribute__((swift_name("testFiles()")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
@@ -194,6 +197,32 @@ __attribute__((swift_name("LibGCase")))
 - (void)doSomething1 __attribute__((swift_name("doSomething1()")));
 - (void)doSomething2 __attribute__((swift_name("doSomething2()")));
 - (NSString *)getContent __attribute__((swift_name("getContent()")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("ColorProvider")))
+@interface Khtf_iosapp_fwColorProvider : KotlinBase
+- (instancetype)initWithValues:(NSDictionary<NSString *, NSString *> *)values __attribute__((swift_name("init(values:)"))) __attribute__((objc_designated_initializer));
+- (NSString * _Nullable)getValKey:(NSString *)key __attribute__((swift_name("getVal(key:)")));
+- (void)putValKey:(NSString *)key value:(NSString *)value __attribute__((swift_name("putVal(key:value:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("ColorProviderFactory")))
+@interface Khtf_iosapp_fwColorProviderFactory : KotlinBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)colorProviderFactory __attribute__((swift_name("init()")));
+@property (readonly) Khtf_iosapp_fwColorProvider *colorProvider __attribute__((swift_name("colorProvider")));
+@property NSString *initialPathToFile __attribute__((swift_name("initialPathToFile")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("PlatformColorProvider")))
+@interface Khtf_iosapp_fwPlatformColorProvider : KotlinBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (void)addPlatformSpecificColor __attribute__((swift_name("addPlatformSpecificColor()")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
@@ -248,6 +277,150 @@ __attribute__((swift_name("LibEntryPoint2")))
 - (NSString *)getString __attribute__((swift_name("getString()")));
 @end;
 
+__attribute__((swift_name("KotlinComparable")))
+@protocol Khtf_iosapp_fwKotlinComparable
+@required
+- (int32_t)compareToOther:(id _Nullable)other __attribute__((swift_name("compareTo(other:)")));
+@end;
+
+__attribute__((swift_name("KotlinEnum")))
+@interface Khtf_iosapp_fwKotlinEnum : KotlinBase <Khtf_iosapp_fwKotlinComparable>
+- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer));
+- (int32_t)compareToOther:(Khtf_iosapp_fwKotlinEnum *)other __attribute__((swift_name("compareTo(other:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) NSString *name __attribute__((swift_name("name")));
+@property (readonly) int32_t ordinal __attribute__((swift_name("ordinal")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("ContentEncoding")))
+@interface Khtf_iosapp_fwContentEncoding : Khtf_iosapp_fwKotlinEnum
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+@property (class, readonly) Khtf_iosapp_fwContentEncoding *utf8 __attribute__((swift_name("utf8")));
+@property (class, readonly) Khtf_iosapp_fwContentEncoding *ascii __attribute__((swift_name("ascii")));
+@property (class, readonly) Khtf_iosapp_fwContentEncoding *base64 __attribute__((swift_name("base64")));
+- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+- (int32_t)compareToOther:(Khtf_iosapp_fwContentEncoding *)other __attribute__((swift_name("compareTo(other:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FileSystem")))
+@interface Khtf_iosapp_fwFileSystem : KotlinBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)fileSystem __attribute__((swift_name("init()")));
+- (BOOL)appendFilePathComponent:(Khtf_iosapp_fwPathComponent *)pathComponent contents:(NSString *)contents create:(BOOL)create encoding:(Khtf_iosapp_fwContentEncoding *)encoding __attribute__((swift_name("appendFile(pathComponent:contents:create:encoding:)")));
+- (BOOL)appendFilePath:(NSString *)path contents:(NSString *)contents create:(BOOL)create encoding:(Khtf_iosapp_fwContentEncoding *)encoding __attribute__((swift_name("appendFile(path:contents:create:encoding:)")));
+- (BOOL)doCopyFileSrcPathComponent:(Khtf_iosapp_fwPathComponent *)srcPathComponent destPathComponent:(Khtf_iosapp_fwPathComponent *)destPathComponent __attribute__((swift_name("doCopyFile(srcPathComponent:destPathComponent:)")));
+- (BOOL)doCopyFileSrcPath:(NSString *)srcPath destPath:(NSString *)destPath __attribute__((swift_name("doCopyFile(srcPath:destPath:)")));
+- (BOOL)existsPathComponent:(Khtf_iosapp_fwPathComponent *)pathComponent __attribute__((swift_name("exists(pathComponent:)")));
+- (BOOL)existsPath:(NSString *)path __attribute__((swift_name("exists(path:)")));
+- (BOOL)mkdirPathComponent:(Khtf_iosapp_fwPathComponent *)pathComponent recursive:(BOOL)recursive __attribute__((swift_name("mkdir(pathComponent:recursive:)")));
+- (BOOL)mkdirPath:(NSString *)path recursive:(BOOL)recursive __attribute__((swift_name("mkdir(path:recursive:)")));
+- (BOOL)moveFileSrcPathComponent:(Khtf_iosapp_fwPathComponent *)srcPathComponent destPathComponent:(Khtf_iosapp_fwPathComponent *)destPathComponent __attribute__((swift_name("moveFile(srcPathComponent:destPathComponent:)")));
+- (BOOL)moveFileSrcPath:(NSString *)srcPath destPath:(NSString *)destPath __attribute__((swift_name("moveFile(srcPath:destPath:)")));
+- (NSArray<Khtf_iosapp_fwStatResult *> * _Nullable)readDirPathComponent:(Khtf_iosapp_fwPathComponent *)pathComponent __attribute__((swift_name("readDir(pathComponent:)")));
+- (NSArray<Khtf_iosapp_fwStatResult *> * _Nullable)readDirPath:(NSString *)path __attribute__((swift_name("readDir(path:)")));
+- (NSString * _Nullable)readFilePathComponent:(Khtf_iosapp_fwPathComponent *)pathComponent encoding:(Khtf_iosapp_fwContentEncoding *)encoding __attribute__((swift_name("readFile(pathComponent:encoding:)")));
+- (NSString * _Nullable)readFilePath:(NSString *)path encoding:(Khtf_iosapp_fwContentEncoding *)encoding __attribute__((swift_name("readFile(path:encoding:)")));
+- (Khtf_iosapp_fwStatResult * _Nullable)statPathComponent:(Khtf_iosapp_fwPathComponent *)pathComponent __attribute__((swift_name("stat(pathComponent:)")));
+- (Khtf_iosapp_fwStatResult * _Nullable)statPath:(NSString *)path __attribute__((swift_name("stat(path:)")));
+- (BOOL)touchPathComponent:(Khtf_iosapp_fwPathComponent *)pathComponent __attribute__((swift_name("touch(pathComponent:)")));
+- (BOOL)touchPath:(NSString *)path __attribute__((swift_name("touch(path:)")));
+- (BOOL)unlinkPathComponent:(Khtf_iosapp_fwPathComponent *)pathComponent __attribute__((swift_name("unlink(pathComponent:)")));
+- (BOOL)unlinkPath:(NSString *)path __attribute__((swift_name("unlink(path:)")));
+- (BOOL)writeFilePathComponent:(Khtf_iosapp_fwPathComponent *)pathComponent contents:(NSString *)contents create:(BOOL)create encoding:(Khtf_iosapp_fwContentEncoding *)encoding __attribute__((swift_name("writeFile(pathComponent:contents:create:encoding:)")));
+- (BOOL)writeFilePath:(NSString *)path contents:(NSString *)contents create:(BOOL)create encoding:(Khtf_iosapp_fwContentEncoding *)encoding __attribute__((swift_name("writeFile(path:contents:create:encoding:)")));
+@property (readonly) Khtf_iosapp_fwPath *cachesDirectory __attribute__((swift_name("cachesDirectory")));
+@property (readonly) Khtf_iosapp_fwPath *contentsDirectory __attribute__((swift_name("contentsDirectory")));
+@property (readonly) Khtf_iosapp_fwPath *temporaryDirectory __attribute__((swift_name("temporaryDirectory")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FileType")))
+@interface Khtf_iosapp_fwFileType : Khtf_iosapp_fwKotlinEnum
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+@property (class, readonly) Khtf_iosapp_fwFileType *regular __attribute__((swift_name("regular")));
+@property (class, readonly) Khtf_iosapp_fwFileType *directory __attribute__((swift_name("directory")));
+@property (class, readonly) Khtf_iosapp_fwFileType *unknown __attribute__((swift_name("unknown")));
+- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+- (int32_t)compareToOther:(Khtf_iosapp_fwFileType *)other __attribute__((swift_name("compareTo(other:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Path")))
+@interface Khtf_iosapp_fwPath : KotlinBase
+- (instancetype)initWithAbsolutePath:(NSString * _Nullable)absolutePath relativePath:(NSString * _Nullable)relativePath __attribute__((swift_name("init(absolutePath:relativePath:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property Khtf_iosapp_fwPathComponent * _Nullable absolutePath __attribute__((swift_name("absolutePath")));
+@property Khtf_iosapp_fwPathComponent * _Nullable relativePath __attribute__((swift_name("relativePath")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Path.Companion")))
+@interface Khtf_iosapp_fwPathCompanion : KotlinBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+- (Khtf_iosapp_fwPath *)fromUrlUrl:(NSURL * _Nullable)url __attribute__((swift_name("fromUrl(url:)")));
+- (Khtf_iosapp_fwPath *)fromUrlStringUrlString:(NSString *)urlString __attribute__((swift_name("fromUrlString(urlString:)")));
+- (Khtf_iosapp_fwPath *)simplifiedPath:(NSString *)path __attribute__((swift_name("simplified(path:)")));
+- (NSURL * _Nullable)urlFromStringUrlString:(NSString * _Nullable)urlString __attribute__((swift_name("urlFromString(urlString:)")));
+@property (readonly) Khtf_iosapp_fwPath *Empty __attribute__((swift_name("Empty")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("PathComponent")))
+@interface Khtf_iosapp_fwPathComponent : KotlinBase
+- (instancetype)initWithComponent:(NSString * _Nullable)component __attribute__((swift_name("init(component:)"))) __attribute__((objc_designated_initializer));
+- (Khtf_iosapp_fwPathComponent * _Nullable)byAppendingComponent:(NSString *)component __attribute__((swift_name("byAppending(component:)")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) NSString * _Nullable component __attribute__((swift_name("component")));
+@property (readonly) NSURL * _Nullable url __attribute__((swift_name("url")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("StatResult")))
+@interface Khtf_iosapp_fwStatResult : KotlinBase
+- (instancetype)initWithName:(NSString *)name absolutePath:(Khtf_iosapp_fwPathComponent *)absolutePath canonicalPath:(Khtf_iosapp_fwPathComponent *)canonicalPath createdAt:(Khtf_iosapp_fwDouble * _Nullable)createdAt modifiedAt:(Khtf_iosapp_fwDouble * _Nullable)modifiedAt size:(Khtf_iosapp_fwDouble * _Nullable)size type:(Khtf_iosapp_fwFileType *)type __attribute__((swift_name("init(name:absolutePath:canonicalPath:createdAt:modifiedAt:size:type:)"))) __attribute__((objc_designated_initializer));
+- (NSString *)component1 __attribute__((swift_name("component1()")));
+- (Khtf_iosapp_fwPathComponent *)component2 __attribute__((swift_name("component2()")));
+- (Khtf_iosapp_fwPathComponent *)component3 __attribute__((swift_name("component3()")));
+- (Khtf_iosapp_fwDouble * _Nullable)component4 __attribute__((swift_name("component4()")));
+- (Khtf_iosapp_fwDouble * _Nullable)component5 __attribute__((swift_name("component5()")));
+- (Khtf_iosapp_fwDouble * _Nullable)component6 __attribute__((swift_name("component6()")));
+- (Khtf_iosapp_fwFileType *)component7 __attribute__((swift_name("component7()")));
+- (Khtf_iosapp_fwStatResult *)doCopyName:(NSString *)name absolutePath:(Khtf_iosapp_fwPathComponent *)absolutePath canonicalPath:(Khtf_iosapp_fwPathComponent *)canonicalPath createdAt:(Khtf_iosapp_fwDouble * _Nullable)createdAt modifiedAt:(Khtf_iosapp_fwDouble * _Nullable)modifiedAt size:(Khtf_iosapp_fwDouble * _Nullable)size type:(Khtf_iosapp_fwFileType *)type __attribute__((swift_name("doCopy(name:absolutePath:canonicalPath:createdAt:modifiedAt:size:type:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) Khtf_iosapp_fwPathComponent *absolutePath __attribute__((swift_name("absolutePath")));
+@property (readonly) Khtf_iosapp_fwPathComponent *canonicalPath __attribute__((swift_name("canonicalPath")));
+@property (readonly) Khtf_iosapp_fwDouble * _Nullable createdAt __attribute__((swift_name("createdAt")));
+@property (readonly) Khtf_iosapp_fwDouble * _Nullable modifiedAt __attribute__((swift_name("modifiedAt")));
+@property (readonly) NSString *name __attribute__((swift_name("name")));
+@property (readonly) Khtf_iosapp_fwDouble * _Nullable size __attribute__((swift_name("size")));
+@property (readonly) Khtf_iosapp_fwFileType *type __attribute__((swift_name("type")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("KotlinString.Companion")))
+@interface Khtf_iosapp_fwKotlinStringCompanion : KotlinBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@end;
+
+@interface Khtf_iosapp_fwKotlinStringCompanion (Extensions)
+- (NSString * _Nullable)fromDataData:(NSData *)data encoding:(Khtf_iosapp_fwContentEncoding *)encoding __attribute__((swift_name("fromData(data:encoding:)")));
+@end;
+
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("HistoryServiceFactoryKt")))
 @interface Khtf_iosapp_fwHistoryServiceFactoryKt : KotlinBase
@@ -258,6 +431,21 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("ModificationServiceFactoryKt")))
 @interface Khtf_iosapp_fwModificationServiceFactoryKt : KotlinBase
 + (void)setDefaultModificationServiceDataMod1:(NSString *)mod1 mod2:(NSString *)mod2 __attribute__((swift_name("setDefaultModificationServiceData(mod1:mod2:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FileSystemKt")))
+@interface Khtf_iosapp_fwFileSystemKt : KotlinBase
++ (NSString *)nativeStr:(NSString *)receiver __attribute__((swift_name("nativeStr(_:)")));
++ (NSData * _Nullable)toData:(NSString *)receiver encoding:(Khtf_iosapp_fwContentEncoding *)encoding __attribute__((swift_name("toData(_:encoding:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("ActualsKt")))
+@interface Khtf_iosapp_fwActualsKt : KotlinBase
++ (int64_t)measureNanoTimeBlock:(void (^)(void))block __attribute__((swift_name("measureNanoTime(block:)")));
++ (int64_t)measureTimeMicrosBlock:(void (^)(void))block __attribute__((swift_name("measureTimeMicros(block:)")));
++ (int64_t)measureTimeMillisBlock:(void (^)(void))block __attribute__((swift_name("measureTimeMillis(block:)")));
 @end;
 
 #pragma clang diagnostic pop
